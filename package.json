@@ -1,0 +1,27 @@
+{
+  "name": "etl_dashboard",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init": "tailwindcss init -p",
+    "dev": "tailwindcss -i ./static/css/styles.css -o ./static/css/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masonaviles/etl_dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/masonaviles/etl_dashboard/issues"
+  },
+  "homepage": "https://github.com/masonaviles/etl_dashboard#readme",
+  "description": "",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.3"
+  }
+}

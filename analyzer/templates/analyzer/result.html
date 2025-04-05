@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="transition duration-300" id="htmlRoot">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Analysis Result</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    {% load static %}
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
   <div class="max-w-5xl mx-auto px-4 py-8">
+    <div class="flex justify-end mb-4">
+        <button
+          onclick="document.getElementById('htmlRoot').classList.toggle('dark')"
+          class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 dark:text-white hover:bg-indigo-200 dark:hover:bg-indigo-600 transition"
+        >
+          Toggle Dark Mode
+        </button>
+    </div>
+      
     <h1 class="text-3xl font-bold mb-6 text-center">Analysis for: <span class="text-indigo-600">{{ session.original_filename }}</span></h1>
 
     <div class="grid md:grid-cols-2 gap-6">
