@@ -1,15 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-        './analyzer/templates/**/*.html',
-        './etl_dashboard/templates/**/*.html',
-        './templates/**/*.html',
-        './**/*.py',
-      ],      
+      './templates/**/*.html',
+      './**/templates/**/*.html',
+      './**/*.html',
+      './**/*.py',
+    ],
     darkMode: 'class',
     theme: {
       extend: {},
     },
     plugins: [],
-}
+  }
   
