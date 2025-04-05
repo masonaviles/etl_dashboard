@@ -1,0 +1,28 @@
+<!-- analyzer/templates/analyzer/result.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analysis Result</title>
+</head>
+<body>
+    <h1>Analysis for: {{ session.original_filename }}</h1>
+
+    <h2>Mean</h2>
+    <pre>{{ result.mean|json_script:"mean-data" }}</pre>
+
+    <h2>Mode</h2>
+    <pre>{{ result.mode|json_script:"mode-data" }}</pre>
+
+    <h2>Value Counts</h2>
+    <pre>{{ result.value_counts|json_script:"vc-data" }}</pre>
+
+    <h2>Null Counts</h2>
+    <pre>{{ result.null_counts|json_script:"nulls-data" }}</pre>
+
+    <h2>Data Types</h2>
+    <pre>{{ result.dtypes|json_script:"dtypes-data" }}</pre>
+
+    <h2>Duplicates Removed</h2>
+    <p>{{ result.duplicates_removed }}</p>
+</body>
+</html>
