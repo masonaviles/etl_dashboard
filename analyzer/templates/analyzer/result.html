@@ -1,28 +1,81 @@
-<!-- analyzer/templates/analyzer/result.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Analysis Result</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analysis Result</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Analysis for: {{ session.original_filename }}</h1>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center">Analysis for: <span class="text-indigo-600">{{ session.original_filename }}</span></h1>
 
-    <h2>Mean</h2>
-    <pre>{{ result.mean|json_script:"mean-data" }}</pre>
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- Mean -->
+      <div class="bg-white p-4 rounded-xl shadow">
+        <h2 class="text-xl font-semibold mb-2 text-indigo-700">Mean</h2>
+        <ul class="text-sm space-y-1">
+          {% for key, value in result.mean.items %}
+            <li><span class="font-medium">{{ key }}:</span> {{ value }}</li>
+          {% empty %}
+            <li>No numeric data available.</li>
+          {% endfor %}
+        </ul>
+      </div>
 
-    <h2>Mode</h2>
-    <pre>{{ result.mode|json_script:"mode-data" }}</pre>
+      <!-- Mode -->
+      <div class="bg-white p-4 rounded-xl shadow">
+        <h2 class="text-xl font-semibold mb-2 text-indigo-700">Mode</h2>
+        <ul class="text-sm space-y-1">
+          {% for key, value in result.mode.items %}
+            <li><span class="font-medium">{{ key }}:</span> {{ value }}</li>
+          {% empty %}
+            <li>No mode available.</li>
+          {% endfor %}
+        </ul>
+      </div>
 
-    <h2>Value Counts</h2>
-    <pre>{{ result.value_counts|json_script:"vc-data" }}</pre>
+      <!-- Value Counts -->
+      <div class="bg-white p-4 rounded-xl shadow md:col-span-2">
+        <h2 class="text-xl font-semibold mb-2 text-indigo-700">Top Value Counts (Top 3 per column)</h2>
+        {% for col, values in result.value_counts.items %}
+          <div class="mb-3">
+            <h3 class="font-medium">{{ col }}</h3>
+            <ul class="text-sm ml-4 list-disc">
+              {% for k, v in values.items %}
+                <li>{{ k }} — {{ v }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
 
-    <h2>Null Counts</h2>
-    <pre>{{ result.null_counts|json_script:"nulls-data" }}</pre>
+      <!-- Null Counts -->
+      <div class="bg-white p-4 rounded-xl shadow">
+        <h2 class="text-xl font-semibold mb-2 text-indigo-700">Null Counts</h2>
+        <ul class="text-sm space-y-1">
+          {% for key, value in result.null_counts.items %}
+            <li><span class="font-medium">{{ key }}:</span> {{ value }}</li>
+          {% endfor %}
+        </ul>
+      </div>
 
-    <h2>Data Types</h2>
-    <pre>{{ result.dtypes|json_script:"dtypes-data" }}</pre>
+      <!-- Data Types -->
+      <div class="bg-white p-4 rounded-xl shadow">
+        <h2 class="text-xl font-semibold mb-2 text-indigo-700">Data Types</h2>
+        <ul class="text-sm space-y-1">
+          {% for key, value in result.dtypes.items %}
+            <li><span class="font-medium">{{ key }}:</span> {{ value }}</li>
+          {% endfor %}
+        </ul>
+      </div>
 
-    <h2>Duplicates Removed</h2>
-    <p>{{ result.duplicates_removed }}</p>
+      <!-- Duplicates Removed -->
+      <div class="bg-white p-4 rounded-xl shadow md:col-span-2">
+        <h2 class="text-xl font-semibold text-indigo-700">Duplicates Removed</h2>
+        <p class="text-lg font-bold mt-2">{{ result.duplicates_removed }}</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
