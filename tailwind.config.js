@@ -4,7 +4,7 @@ module.exports = {
       './analyzer/templates/**/*.html',
       './templates/**/*.html',
     ],
-    darkMode: 'class',
+    darkMode: ['class', '.dark-mode'],
     theme: {
       extend: {},
     },

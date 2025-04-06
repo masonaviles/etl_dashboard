@@ -1,30 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" class="transition duration-300" id="htmlRoot">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Analysis Result</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="{% static 'css/output.css' %}" rel="stylesheet">
-</head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<html lang="en" id="htmlRoot" class="transition duration-300">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Analysis Result</title>
+      
+        <script>
+          tailwind.config = {
+            darkMode: 'class'
+          }
+        </script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="{% static 'css/output.css' %}" rel="stylesheet">
+    </head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans transition duration-300">
   <div class="max-w-5xl mx-auto px-4 py-8">
     <div class="flex justify-end mb-4">
-        <button
-          onclick="document.getElementById('htmlRoot').classList.toggle('dark')"
-          class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 dark:text-white hover:bg-indigo-200 dark:hover:bg-indigo-600 transition"
-        >
-          Toggle Dark Mode
-        </button>
+      <button
+        onclick="toggleDarkMode()"
+        class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 dark:text-white hover:bg-indigo-200 dark:hover:bg-indigo-600 transition"
+      >
+        Toggle Dark Mode
+      </button>
     </div>
-      
-    <h1 class="text-3xl font-bold mb-6 text-center">Analysis for: <span class="text-indigo-600">{{ session.original_filename }}</span></h1>
+
+    <h1 class="text-3xl font-bold mb-6 text-center">
+      Analysis for: <span class="text-indigo-600 dark:text-indigo-400">{{ session.original_filename }}</span>
+    </h1>
 
     <div class="grid md:grid-cols-2 gap-6">
       <!-- Mean -->
-      <div class="bg-white p-4 rounded-xl shadow">
-        <h2 class="text-xl font-semibold mb-2 text-indigo-700">Mean</h2>
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+        <h2 class="text-xl font-semibold mb-2 text-indigo-700 dark:text-indigo-300">Mean</h2>
         <ul class="text-sm space-y-1">
           {% for key, value in result.mean.items %}
             <li><span class="font-medium">{{ key }}:</span> {{ value }}</li>
@@ -35,8 +43,8 @@
       </div>
 
       <!-- Mode -->
-      <div class="bg-white p-4 rounded-xl shadow">
-        <h2 class="text-xl font-semibold mb-2 text-indigo-700">Mode</h2>
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+        <h2 class="text-xl font-semibold mb-2 text-indigo-700 dark:text-indigo-300">Mode</h2>
         <ul class="text-sm space-y-1">
           {% for key, value in result.mode.items %}
             <li><span class="font-medium">{{ key }}:</span> {{ value }}</li>
@@ -47,8 +55,8 @@
       </div>
 
       <!-- Value Counts -->
-      <div class="bg-white p-4 rounded-xl shadow md:col-span-2">
-        <h2 class="text-xl font-semibold mb-2 text-indigo-700">Top Value Counts (Top 3 per column)</h2>
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow md:col-span-2">
+        <h2 class="text-xl font-semibold mb-2 text-indigo-700 dark:text-indigo-300">Top Value Counts (Top 3 per column)</h2>
         {% for col, values in result.value_counts.items %}
           <div class="mb-3">
             <h3 class="font-medium">{{ col }}</h3>
@@ -62,8 +70,8 @@
       </div>
 
       <!-- Null Counts -->
-      <div class="bg-white p-4 rounded-xl shadow">
-        <h2 class="text-xl font-semibold mb-2 text-indigo-700">Null Counts</h2>
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+        <h2 class="text-xl font-semibold mb-2 text-indigo-700 dark:text-indigo-300">Null Counts</h2>
         <ul class="text-sm space-y-1">
           {% for key, value in result.null_counts.items %}
             <li><span class="font-medium">{{ key }}:</span> {{ value }}</li>
@@ -72,8 +80,8 @@
       </div>
 
       <!-- Data Types -->
-      <div class="bg-white p-4 rounded-xl shadow">
-        <h2 class="text-xl font-semibold mb-2 text-indigo-700">Data Types</h2>
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+        <h2 class="text-xl font-semibold mb-2 text-indigo-700 dark:text-indigo-300">Data Types</h2>
         <ul class="text-sm space-y-1">
           {% for key, value in result.dtypes.items %}
             <li><span class="font-medium">{{ key }}:</span> {{ value }}</li>
@@ -82,11 +90,12 @@
       </div>
 
       <!-- Duplicates Removed -->
-      <div class="bg-white p-4 rounded-xl shadow md:col-span-2">
-        <h2 class="text-xl font-semibold text-indigo-700">Duplicates Removed</h2>
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow md:col-span-2">
+        <h2 class="text-xl font-semibold text-indigo-700 dark:text-indigo-300">Duplicates Removed</h2>
         <p class="text-lg font-bold mt-2">{{ result.duplicates_removed }}</p>
       </div>
     </div>
   </div>
+  <script src="{% static 'js/theme-toggle.js' %}"></script>
 </body>
 </html>
