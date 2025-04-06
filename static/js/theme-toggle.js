@@ -1,11 +1,10 @@
-// static/js/theme-toggle.js
-
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     const htmlRoot = document.getElementById("htmlRoot");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const theme = localStorage.theme || (prefersDark ? "dark" : "light");
   
-    if (theme === "dark") {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
       htmlRoot.classList.add("dark");
     }
   
